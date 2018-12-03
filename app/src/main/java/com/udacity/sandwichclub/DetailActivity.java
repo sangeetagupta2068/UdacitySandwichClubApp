@@ -3,7 +3,6 @@ package com.udacity.sandwichclub;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -18,9 +17,9 @@ public class DetailActivity extends AppCompatActivity {
     public static final String EXTRA_POSITION = "extra_position";
     private static final int DEFAULT_POSITION = -1;
 
-    TextView mDisplayOtherNameView, mDisplayPlaceOfOriginView, mDisplayDescriptionView, mDisplayIngredients ;
+    TextView mDisplayOtherNameView, mDisplayPlaceOfOriginView, mDisplayDescriptionView, mDisplayIngredients;
     ImageView ingredientsIv;
-    TextView mDisplayOtherNameLabel,mDisplayPlaceOfOriginLabel, mDisplayDescriptionLabel, mDisplayIngredientsLabel;
+    TextView mDisplayOtherNameLabel, mDisplayPlaceOfOriginLabel, mDisplayDescriptionLabel, mDisplayIngredientsLabel;
     Sandwich sandwich;
 
     @Override
@@ -61,7 +60,6 @@ public class DetailActivity extends AppCompatActivity {
             return;
         }
 
-        Log.d("DetailActivity",sandwich.getMainName());
         populateUI();
 
         setTitle(sandwich.getMainName());
@@ -75,14 +73,14 @@ public class DetailActivity extends AppCompatActivity {
     private void populateUI() {
 
 
-        if(sandwich.getAlsoKnownAs() != null && sandwich.getAlsoKnownAs().size() > 0) {
+        if (sandwich.getAlsoKnownAs() != null && sandwich.getAlsoKnownAs().size() > 0) {
             StringBuilder otherNameStringBuilder = new StringBuilder();
             for (int count = 0; count < sandwich.getAlsoKnownAs().size(); count++) {
                 otherNameStringBuilder.append(sandwich.getAlsoKnownAs().get(count) + ",");
             }
-            otherNameStringBuilder.deleteCharAt(otherNameStringBuilder.length()-1);
+            otherNameStringBuilder.deleteCharAt(otherNameStringBuilder.length() - 1);
             mDisplayOtherNameView.setText(otherNameStringBuilder.toString());
-        }else{
+        } else {
             mDisplayOtherNameView.setVisibility(View.GONE);
             mDisplayOtherNameLabel.setVisibility(View.GONE);
         }
@@ -92,9 +90,9 @@ public class DetailActivity extends AppCompatActivity {
             for (int count = 0; count < sandwich.getIngredients().size(); count++) {
                 ingredientStringBuilder.append(sandwich.getIngredients().get(count) + ",");
             }
-            ingredientStringBuilder.deleteCharAt(ingredientStringBuilder.length()-1);
+            ingredientStringBuilder.deleteCharAt(ingredientStringBuilder.length() - 1);
             mDisplayIngredients.setText(ingredientStringBuilder.toString());
-        } else{
+        } else {
             mDisplayIngredients.setVisibility(View.GONE);
             mDisplayIngredientsLabel.setVisibility(View.GONE);
         }
@@ -102,7 +100,7 @@ public class DetailActivity extends AppCompatActivity {
 
         mDisplayDescriptionView.setText(sandwich.getDescription());
 
-        if(!sandwich.getPlaceOfOrigin().isEmpty()) {
+        if (!sandwich.getPlaceOfOrigin().isEmpty()) {
             mDisplayPlaceOfOriginView.setText(sandwich.getPlaceOfOrigin());
         } else {
             mDisplayPlaceOfOriginView.setVisibility(View.GONE);
