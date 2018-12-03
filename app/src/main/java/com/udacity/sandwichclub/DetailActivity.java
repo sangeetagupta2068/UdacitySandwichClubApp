@@ -3,6 +3,7 @@ package com.udacity.sandwichclub;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -60,6 +61,7 @@ public class DetailActivity extends AppCompatActivity {
             return;
         }
 
+        Log.d("DetailActivity",sandwich.getMainName());
         populateUI();
 
         setTitle(sandwich.getMainName());
@@ -72,12 +74,13 @@ public class DetailActivity extends AppCompatActivity {
 
     private void populateUI() {
 
-        StringBuilder otherNameStringBuilder = new StringBuilder();
+
         if(sandwich.getAlsoKnownAs() != null && sandwich.getAlsoKnownAs().size() > 0) {
-            otherNameStringBuilder.append(sandwich.getAlsoKnownAs().get(0));
-            for (int count = 1; count < sandwich.getAlsoKnownAs().size(); count++) {
-                otherNameStringBuilder.append("," + sandwich.getAlsoKnownAs().get(count));
+            StringBuilder otherNameStringBuilder = new StringBuilder();
+            for (int count = 0; count < sandwich.getAlsoKnownAs().size(); count++) {
+                otherNameStringBuilder.append(sandwich.getAlsoKnownAs().get(count) + ",");
             }
+            otherNameStringBuilder.deleteCharAt(otherNameStringBuilder.length()-1);
             mDisplayOtherNameView.setText(otherNameStringBuilder.toString());
         }else{
             mDisplayOtherNameView.setVisibility(View.GONE);
@@ -86,10 +89,10 @@ public class DetailActivity extends AppCompatActivity {
 
         if (sandwich.getIngredients() != null && sandwich.getIngredients().size() > 0) {
             StringBuilder ingredientStringBuilder = new StringBuilder();
-            ingredientStringBuilder.append(sandwich.getIngredients().get(0));
-            for (int count = 1; count < sandwich.getIngredients().size(); count++) {
-                ingredientStringBuilder.append("," + sandwich.getAlsoKnownAs().get(count));
+            for (int count = 0; count < sandwich.getIngredients().size(); count++) {
+                ingredientStringBuilder.append(sandwich.getIngredients().get(count) + ",");
             }
+            ingredientStringBuilder.deleteCharAt(ingredientStringBuilder.length()-1);
             mDisplayIngredients.setText(ingredientStringBuilder.toString());
         } else{
             mDisplayIngredients.setVisibility(View.GONE);

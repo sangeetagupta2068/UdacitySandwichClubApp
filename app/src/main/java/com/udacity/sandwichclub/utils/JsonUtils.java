@@ -15,8 +15,7 @@ public class JsonUtils {
 
     public static Sandwich parseSandwichJson(String json){
 
-        Sandwich sandwich;
-
+        Sandwich sandwich = null;
         try {
 
             JSONObject sandwichJSON = new JSONObject(json);
@@ -38,7 +37,7 @@ public class JsonUtils {
 
             List<String> sandwichIngredients = new ArrayList<>();
             JSONArray sandwichJSONIngredients = sandwichJSON.getJSONArray("ingredients");
-            for(int count = 0; count<sandwichJSONAlsoKnownAs.length();count++){
+            for(int count = 0; count<sandwichJSONIngredients.length();count++){
                 sandwichIngredients.add(sandwichJSONIngredients.getString(count));
             }
 
@@ -46,7 +45,6 @@ public class JsonUtils {
 
         } catch (JSONException e) {
             e.printStackTrace();
-            sandwich = new Sandwich();
         }
 
         return sandwich;
